@@ -7,7 +7,7 @@ const Main = () => {
 
   return (
     <>
-    {/* <Header/> */}
+    <Header/>
     <List/>
     </>
   );

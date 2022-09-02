@@ -7,7 +7,7 @@ const Post = () => {
 
   return (
     <>
-    {/* <Header/> */}
+    <Header/>
     <Detail/>
     </>
   );
