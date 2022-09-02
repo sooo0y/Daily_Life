@@ -5,6 +5,7 @@ import {useNavigate } from "react-router-dom";
 const Header = () => {
     let navigate = useNavigate()
 return(
+    
     <div>
          <HeaderWrap>
          <h1 onClick={()=>navigate("/")}>지금V</h1>
