@@ -6,7 +6,7 @@ import Write from "../components/Write";
 const WritePage = () => {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <Write />
     </>
   );

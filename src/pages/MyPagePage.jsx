@@ -6,7 +6,7 @@ import MyPage from "../components/MyPage";
 const MyPagePage = () => {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <MyPage />
     </>
   );
