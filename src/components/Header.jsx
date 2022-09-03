@@ -7,7 +7,19 @@ const Header = () => {
 
   return (
     <StHeader>
-      <h1 onClick={navigate('/')}>지금V</h1>
+      <div>
+        <h1
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          지금V
+        </h1>
+
+        <NavList onClick={() => navigate("/write")}>Write</NavList>
+        <NavList onClick={() => navigate("/mypage")}>My page</NavList>
+        <NavList onClick={() => navigate("/login")}>Login</NavList>
+      </div>
     </StHeader>
   );
 };
@@ -27,6 +39,16 @@ const StHeader = styled.div`
     cursor: pointer;
     width: 350px;
   }
+  & div {
+    display: flex;
+    gap: 20px;
+    float: right;
+    margin-right: 300px;
+  }
 
   background-color: #d490e0;
+`;
+
+const NavList = styled.p`
+  color: black;
 `;

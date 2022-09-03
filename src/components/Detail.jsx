@@ -1,44 +1,50 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import CommentEditModal from "./modal/CommentEditModal";
+import React, { useEffect, useState } from "react";
+import { __getPosts } from "../redux/modules/form";
+import { useSelector, useDispatch } from "react-redux";
 
 const Detail = () => {
+  const param = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { isLoading, error, posts } = useSelector((state) => state.form);
+
+  useEffect(() => {
+    dispatch(__getPosts());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
 
   return (
     <StDetail>
-      <button onClick={navigate(-1)}>이전으로</button>
-      <Post>
-        <Title>
-          <p>제목</p>
-          <p>작성시간</p>
-        </Title>
-        {/* <img/> */}
-        <Img />
-        <p>내용</p>
-        <Buttom>
-          <p>좋아요 수</p>
-          <p>댓글 수</p>
-        </Buttom>
-      </Post>
-
-      <Comment>
-        <form>
-          <input />
-          <button>작성</button>
-        </form>
-
-        <Comments>
-          <p>ID</p>
-          <p>댓글 내용</p>
-          <p>작성시간</p>
-          <button>수정</button>
-          <button>삭제</button>
-        </Comments>
-      </Comment>
-
-      {/* <CommentEditModal/> */}
+      <button onClick={() => {navigate(-1)}}>이전으로</button>
+      {posts.map((post) => {
+        if (post.id == param.id) {
+          return (
+            <Post key={post.id}>
+              <Title>
+              <p>{post.author}</p>
+              <p>{post.modifiedAt}</p>
+              </Title>
+              <h3>{post.title}</h3>
+              <Img />
+              <p>{post.desc}</p>
+              <Bottom>
+                <p>{post.likeCount}</p>
+                <p>{post.commentCount}</p>
+              </Bottom>
+            </Post>
+          );
+        }
+      })}
     </StDetail>
   );
 };
@@ -62,32 +68,14 @@ const Title = styled.div`
   justify-content: space-between;
 `;
 
-const Buttom = styled.div`
+const Bottom = styled.div`
   display: flex;
   gap: 30px;
 `;
 
-const Comment = styled.div`
-  border: 1px solid black;
-  margin: 50px;
-  padding: 20px 50px;
-  & form {
-    display: flex;
-    gap: 15px;
-  }
-  & input {
-    width: 500px;
-  }
-`;
-
 const Img = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 500px;
-  height: 300px;
+  height: 100px;
 `;
 
-const Comments = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-`;

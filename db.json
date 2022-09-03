@@ -1,0 +1,40 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "왜안돼",
+      "author": "김소연",
+      "image": "",
+      "desc": "살려주세여",
+      "likeCount": 0,
+      "commentCount": 0
+    },
+    {
+      "id": "id234",
+      "title": "이게 왜 정의가 안 됐대??",
+      "author": "김소연2",
+      "image": "",
+      "desc": "이즈로딩..",
+      "likeCount": 0,
+      "commentCount": 0
+    }
+  ],
+  "comments": [
+    {
+      "parentId": "1",
+      "commentId": "id24",
+      "author": "김소연",
+      "desc": "aaa",
+      "modal": false,
+      "id": 1
+    },
+    {
+      "parentId": "1",
+      "commentId": "id28",
+      "author": "김소연",
+      "desc": "aaa",
+      "modal": false,
+      "id": 2
+    }
+  ]
+}

@@ -1,7 +1,12 @@
-import { createStore } from "redux";
-import { combineReducers } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import commentsSlice from "../modules/comment";
+import formSlice from "../modules/form";
 
-const rootReducer = combineReducers({});
-const store = createStore(rootReducer);
+const store = configureStore({
+  reducer: {
+		comment: commentsSlice.reducer,
+    form: formSlice.reducer,
+  },
+});
 
 export default store;
