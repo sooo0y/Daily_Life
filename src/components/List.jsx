@@ -6,16 +6,15 @@ const List = () => {
   return (
     <div>
       <CardWrap>
-        Const card=[username="",title=""]
-      {card.map(function(){
-          return (
-          <div className="list">
-            <h4>{username}</h4>
-            <p>2월 18일 발행</p>
-          </div> )
-        }) 
-      }
-        <Card>
+       <Card>
+          <img
+          style={{ width: "100%" }}
+          src="https://www.jejutwn.com/data/photos/20220520/art_1652835126992_87d2ac.jpg"
+          alt="NewJeans"
+        ></img>
+        <p>작성자</p>
+        <p>제목</p>
+      </Card><Card>
           <img
           style={{ width: "100%" }}
           src="https://www.jejutwn.com/data/photos/20220520/art_1652835126992_87d2ac.jpg"
@@ -24,6 +23,15 @@ const List = () => {
         <p>작성자</p>
         <p>제목</p>
       </Card>
+      <Card>
+          <img
+          style={{ width: "100%" }}
+          src="https://www.jejutwn.com/data/photos/20220520/art_1652835126992_87d2ac.jpg"
+          alt="NewJeans"
+        ></img>
+        <p>작성자</p>
+        <p>제목</p>
+      </Card>s
         </CardWrap>
         
         </div>
