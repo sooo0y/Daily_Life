@@ -1,25 +1,29 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import nextId from "react-id-generator";
 import axios from "axios";
-import { addPost } from "../redux/modules/form";
-import { useDispatch } from "react-redux";
+import { addPost } from "../redux/modules/post";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { __getPosts, deletePost } from "../redux/modules/post";
 
 const Write = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const id = nextId();
 
+  const { isLoading, error, posts } = useSelector((state) => state.post);
+
   // 새롭게 추가할 post의 데이터를 저장할 state 생성
   const initialState = {
-    id: 1,
+    id: id,
     title: "",
-    author: "",
+    author: "김소연",
     image: "",
     content: "",
     likeCount: 0,
     commentCount: 0,
+    modal: false,
   };
 
   const [post, setPost] = useState(initialState);
@@ -31,11 +35,22 @@ const Write = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(addPost({ ...post, id: id }));
-    axios.post(`http://localhost:3001/posts`, { ...post, id: id });
+    dispatch(addPost(post));
     setPost(initialState);
     navigate('/')
   };
+
+  useEffect(() => {
+    dispatch(__getPosts());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
 
   return (
     <StWrite 
@@ -49,6 +64,7 @@ const Write = () => {
             name="title"
             value={post.title}
             onChange={onChangeHandler}
+            required
           />
         </Title>
         <Body>
@@ -58,6 +74,7 @@ const Write = () => {
             name="content"
             value={post.content}
             onChange={onChangeHandler}
+            required
           />
         </Body>
         <input
@@ -65,9 +82,10 @@ const Write = () => {
           name="image"
           value={post.image}
           onChange={onChangeHandler}
+          // required
         />
         <Buttons>
-          <button>취소</button>
+          {/* <button>취소</button> */}
           <button>작성완료</button>
         </Buttons>
       </div>

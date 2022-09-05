@@ -1,22 +1,75 @@
-import React from "react";
 import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { __getPosts, deletePost } from "../redux/modules/post";
+import ModalPortal from "./modal/commentEdit/Portal";
+import Modal from "./modal/postEdit/Modal";
 
 const MyPage = () => {
+  const dispatch = useDispatch();
+
+  const { isLoading, error, posts } = useSelector((state) => state.post);
+
+  // 전체 포스트(posts) 중에 로그인 한 사람이 쓴 포스트(post.author == loginId)만 걸러줘
+  // const filteredPost = posts.filter((post) => {});
+
+  const [modal, setModal] = useState(false);
+
+  const [eachPost, setEachPost] = useState();
+
+  const onModalHandler = (post) => {
+    setEachPost(post);
+    setModal(!modal);
+  };
+
+  useEffect(() => {
+    dispatch(__getPosts());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
+
   return (
     <StMyPage>
       <h3>내가 작성한 글</h3>
       <List>
-        <Card>
-          <Buttons>
-            <button>수정</button>
-            <button>삭제</button>
-          </Buttons>
-          <Contents>
-            <p>작성자</p>
-            <Img />
-            <p>제목</p>
-          </Contents>
-        </Card>
+        {posts.map((post) => {
+          return (
+            <Card key={post.id}>
+              <Buttons>
+                <button onClick={() => onModalHandler(post)}>수정</button>
+                <button
+                  onClick={() => {
+                    dispatch(deletePost(post.id));
+                  }}
+                >
+                  삭제
+                </button>
+              </Buttons>
+              <Contents>
+                <p>{post.author}</p>
+                <Img />
+                <p>{post.title}</p>
+              </Contents>
+            </Card>
+          );
+        })}
+
+        <ModalPortal>
+          {modal && (
+            <Modal
+              onModalHandler={onModalHandler}
+              modal={modal}
+              setModal={setModal}
+              eachPost={eachPost}
+            />
+          )}
+        </ModalPortal>
       </List>
     </StMyPage>
   );

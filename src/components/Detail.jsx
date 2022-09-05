@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import React, { useEffect, useState } from "react";
-import { __getPosts } from "../redux/modules/form";
+import React, { useEffect } from "react";
+import { __getPosts } from "../redux/modules/post";
 import { useSelector, useDispatch } from "react-redux";
 
 const Detail = () => {
@@ -9,7 +9,7 @@ const Detail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { isLoading, error, posts } = useSelector((state) => state.form);
+  const { isLoading, error, posts } = useSelector((state) => state.post);
 
   useEffect(() => {
     dispatch(__getPosts());

@@ -7,34 +7,76 @@
       "image": "",
       "desc": "살려주세여",
       "likeCount": 0,
-      "commentCount": 0
+      "commentCount": 0,
+      "modal": false
     },
     {
       "id": "id234",
-      "title": "이게 왜 정의가 안 됐대??",
+      "title": "왜 안 될까??",
       "author": "김소연2",
       "image": "",
-      "desc": "이즈로딩..",
+      "desc": "응???",
       "likeCount": 0,
-      "commentCount": 0
+      "commentCount": 0,
+      "modal": false
     }
   ],
   "comments": [
     {
+      "id": "id1",
       "parentId": "1",
-      "commentId": "id24",
       "author": "김소연",
-      "desc": "aaa",
-      "modal": false,
-      "id": 1
+      "desc": "1111122222ㅇㅇㅇㅇㅇㅇㅇㅣㅣㅣ",
+      "modifiedAt": "",
+      "modal": false
     },
     {
+      "id": "id11",
       "parentId": "1",
-      "commentId": "id28",
       "author": "김소연",
-      "desc": "aaa",
-      "modal": false,
-      "id": 2
+      "desc": "2222222",
+      "modifiedAt": "",
+      "modal": false
+    },
+    {
+      "id": "id19",
+      "parentId": "1",
+      "author": "김소연",
+      "desc": "ㅇㄹㅇㄹㅇㄹ",
+      "modifiedAt": "",
+      "modal": false
+    },
+    {
+      "id": "id4",
+      "parentId": "1",
+      "author": "김소연",
+      "desc": "김소연",
+      "modifiedAt": "",
+      "modal": false
+    },
+    {
+      "id": "id30",
+      "parentId": "id234",
+      "author": "김소연",
+      "desc": "김소연2222\n",
+      "modifiedAt": "",
+      "modal": false
+    },
+    {
+      "id": "id41",
+      "parentId": "id234",
+      "author": "김소연",
+      "desc": "김소연",
+      "modifiedAt": "",
+      "modal": false
+    },
+    {
+      "id": "id51",
+      "parentId": "id234",
+      "author": "김소연",
+      "desc": "김소연",
+      "modifiedAt": "",
+      "modal": false
     }
   ]
 }

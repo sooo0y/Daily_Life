@@ -1,39 +1,59 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import { useDispatch } from "react-redux/";
-import { updateComment } from "../../redux/modules/comment";
-import nextId from "react-id-generator";
+import { updatePost } from "../../../redux/modules/post";
 
 const Modal = (props) => {
-  
   const dispatch = useDispatch();
 
-  // comment의 id와 선택한 버튼의 id가 같은 것만 골라줘???
-  // const filteredComment = props.comments.filter((comment) => comment.id ==   )
-
-
-  const [editComment, setEditComment] = useState({
-    id: props.comment.id,
-    parentId: props.comment.parentId,
-    commentId: props.comment.commentId,
-    author: props.comment.author,
-    desc: props.comment.desc,
+  const [editPost, setEditPost] = useState({
+    id: props.eachPost.id,
+    title: props.eachPost.title,
+    desc: props.eachPost.desc,
+    image: props.eachPost.image,
   });
 
   return (
     <StModal>
       <Card>
         <div>
-          <label>댓글</label>
+          <label>제목</label>
+          <input
+            type="text"
+            name="title"
+            defaultValue={props.eachPost.title}
+            onChange={(e) => {
+              setEditPost({
+                ...editPost,
+                title: e.target.value,
+              });
+            }}
+          />
+        </div>
+        <div>
+          <label>내용</label>
           <input
             type="text"
             name="desc"
-            defaultValue={props.comment.desc}
+            defaultValue={props.eachPost.desc}
             onChange={(e) => {
-              setEditComment({
-                ...editComment,
+              setEditPost({
+                ...editPost,
                 desc: e.target.value,
+              });
+            }}
+          />
+        </div>
+        <div>
+          <label>이미지</label>
+          <input
+            type="file"
+            name="image"
+            defaultValue={props.eachPost.image}
+            onChange={(e) => {
+              setEditPost({
+                ...editPost,
+                image: e.target.value,
               });
             }}
           />
@@ -42,9 +62,7 @@ const Modal = (props) => {
           <button
             type="button"
             onClick={() => {
-              dispatch(
-                updateComment({ ...editComment, desc: editComment.desc})
-              );
+              dispatch(updatePost(editPost));
               props.setModal(!props.modal);
             }}
           >

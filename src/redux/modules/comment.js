@@ -30,24 +30,26 @@ export const commentsSlice = createSlice({
     },
 
     updateComment: (state, action) => {
+
+      console.log(action.payload.id)
+
       const index = state.comments.findIndex(
         (comment) => comment.id === action.payload.id
       );
       state.comments.splice(index, 1, action.payload);
       axios.patch(
         `http://localhost:3001/comments/${action.payload.id}`,
-        action.payload
+       action.payload
       );
     },
 
     deleteComment: (state, action) => {
-
       const index = state.comments.findIndex(
-        (comment) => comment.id === action.payload.id
+        (comment) => comment.id === action.payload
       );
 
       state.comments.splice(index, 1);
-      axios.delete(`http://localhost:3001/comments/${action.payload.id}`);
+      axios.delete(`http://localhost:3001/comments/${action.payload}`);
     },
 
   },

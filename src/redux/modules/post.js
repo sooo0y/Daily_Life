@@ -20,12 +20,34 @@ export const __getPosts = createAsyncThunk(
   }
 );
 
-export const formSlice = createSlice({
-  name : "form",
+export const postSlice = createSlice({
+  name : "post",
   initialState,
   reducers: { // Reducer 안에 만든 함수 자체가 리듀서 로직이자, Action creator
     addPost: (state, action) => {
+
+      console.log(action.payload)
       state.posts.push(action.payload)   
+      axios.post("http://localhost:3001/posts", action.payload);
+    },
+
+    deletePost: (state, action) => {
+      const index = state.posts.findIndex(
+        (post) => post.id === action.payload
+      );
+      state.posts.splice(index, 1);
+      axios.delete(`http://localhost:3001/posts/${action.payload}`);
+    },
+
+    updatePost: (state, action) => {
+      const index = state.posts.findIndex(
+        (post) => post.id === action.payload.id
+      );
+      state.posts.splice(index, 1, action.payload);
+      axios.patch(
+        `http://localhost:3001/posts/${action.payload.id}`,
+       action.payload
+      );
     },
     
    },
@@ -47,5 +69,5 @@ export const formSlice = createSlice({
 });
 
 
-export const { addPost } = formSlice.actions;
-export default formSlice;
+export const { addPost, deletePost, updatePost } = postSlice.actions;
+export default postSlice;

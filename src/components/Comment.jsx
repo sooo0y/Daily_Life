@@ -2,12 +2,11 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { deleteComment, __getComments } from "../redux/modules/comment";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import nextId from "react-id-generator";
-import axios from "axios";
 import { addComment } from "../redux/modules/comment";
-import Modal from "./modal/Modal";
-import ModalPortal from "./modal/Portal";
+import Modal from "./modal/commentEdit/Modal";
+import ModalPortal from "./modal/commentEdit/Portal";
 
 const Comment = () => {
   const dispatch = useDispatch();
@@ -24,31 +23,35 @@ const Comment = () => {
   // modal이 true이면 열고, false이면 닫혀있는 상태이기때문에 initialstate는 false임
   const [modal, setModal] = useState(false);
 
-  const onModalHandler = () => {
+  const onModalHandler = (it) => {
+    setEachComment(it);
     setModal(!modal);
   };
 
   // 새로 작성하는 comment를 담아주기 위한 state
   const initialState = {
+    id: number,
     parentId: id,
-    commentId: 0,
     author: "김소연", // 나중에 loginId로 바꿀 것
     desc: "",
-    modal:false
+    modifiedAt: "",
+    modal: false,
   };
 
   const [comment, setComment] = useState(initialState);
 
+  const [eachComment, setEachComment] = useState();
+
   // input에 들어오는 값으로 comment를 추가
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
-    setComment({ ...comment, [name]: value, commentId: number });
+    setComment({ ...comment, [name]: value });
   };
 
-  // 추가된 comment를 서버에 보내줌
+  // 추가된 comment를 서버에 보내주고, comment 초기화
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    dispatch(addComment({ ...comment, commentId: number }));
+    dispatch(addComment(comment));
     setComment(initialState);
   };
 
@@ -79,29 +82,17 @@ const Comment = () => {
       </form>
 
       <Comments>
-        {filteredComment.map((comment) => {
+        {filteredComment.map((it) => {
           return (
-            <Content key={comment.commentId}>
-              <p>{comment.author}</p>
-              <p>{comment.desc}</p>
-              <p>{comment.modifiedAt}</p>
-              <ModalPortal>
-                {modal && (
-                  <Modal
-                    onModalHandler={onModalHandler}
-                    comment={comment}
-                    comments={comments}
-                    modal={modal}
-                    setModal={setModal}
-                  />
-                )}
-              </ModalPortal>
-
+            <Content key={it.id}>
+              <p>{it.author}</p>
+              <p>{it.desc}</p>
+              <p>{it.modifiedAt}</p>
               <div>
-                <button onClick={onModalHandler}>수정</button>
+                <button onClick={() => onModalHandler(it)}>수정</button>
                 <button
                   onClick={() => {
-                    dispatch(deleteComment(comment));
+                    dispatch(deleteComment(it.id));
                   }}
                 >
                   삭제
@@ -110,6 +101,16 @@ const Comment = () => {
             </Content>
           );
         })}
+        <ModalPortal>
+          {modal && (
+            <Modal
+              onModalHandler={onModalHandler}
+              modal={modal}
+              setModal={setModal}
+              eachComment={eachComment}
+            />
+          )}
+        </ModalPortal>
       </Comments>
     </StComment>
   );
