@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import nextId from "react-id-generator";
 import { addComment } from "../redux/modules/comment";
-import Modal from "./modal/commentEdit/Modal";
+import CommentModal from "./modal/commentEdit/CommentModal";
 import ModalPortal from "./modal/commentEdit/Portal";
 
 const Comment = () => {
@@ -69,49 +69,51 @@ const Comment = () => {
 
   return (
     <StComment>
-      <form onSubmit={onSubmitHandler}>
-        <label>Comment</label>
-        <input
-          type="text"
-          name="desc"
-          value={comment.desc}
-          onChange={onChangeHandler}
-          required
-        />
-        <button>작성</button>
-      </form>
+      <Container>
+        <form onSubmit={onSubmitHandler}>
+          <label>Comment</label>
+          <input
+            type="text"
+            name="desc"
+            value={comment.desc}
+            onChange={onChangeHandler}
+            required
+          />
+          <button>작성</button>
+        </form>
 
-      <Comments>
-        {filteredComment.map((it) => {
-          return (
-            <Content key={it.id}>
-              <p>{it.author}</p>
-              <p>{it.desc}</p>
-              <p>{it.modifiedAt}</p>
-              <div>
-                <button onClick={() => onModalHandler(it)}>수정</button>
-                <button
-                  onClick={() => {
-                    dispatch(deleteComment(it.id));
-                  }}
-                >
-                  삭제
-                </button>
-              </div>
-            </Content>
-          );
-        })}
-        <ModalPortal>
-          {modal && (
-            <Modal
-              onModalHandler={onModalHandler}
-              modal={modal}
-              setModal={setModal}
-              eachComment={eachComment}
-            />
-          )}
-        </ModalPortal>
-      </Comments>
+        <Comments>
+          {filteredComment.map((it) => {
+            return (
+              <Content key={it.id}>
+                <p>{it.author}</p>
+                <p>{it.desc}</p>
+                <p>{it.modifiedAt}</p>
+                <div>
+                  <button onClick={() => onModalHandler(it)}>수정</button>
+                  <button
+                    onClick={() => {
+                      dispatch(deleteComment(it.id));
+                    }}
+                  >
+                    삭제
+                  </button>
+                </div>
+              </Content>
+            );
+          })}
+          <ModalPortal>
+            {modal && (
+              <CommentModal
+                onModalHandler={onModalHandler}
+                modal={modal}
+                setModal={setModal}
+                eachComment={eachComment}
+              />
+            )}
+          </ModalPortal>
+        </Comments>
+      </Container>
     </StComment>
   );
 };
@@ -119,17 +121,21 @@ const Comment = () => {
 export default Comment;
 
 const StComment = styled.div`
-  border: 1px solid black;
-  margin: auto 400px;
-  padding: 30px;
+  margin: 0 150px;
 
   & form {
     display: flex;
     gap: 15px;
   }
   & input {
-    width: 580px;
+    width: 540px;
   }
+`;
+
+const Container = styled.div`
+  border: 1px solid black;
+  margin: 30px;
+  padding: 20px;
 `;
 
 const Comments = styled.div`
@@ -139,4 +145,6 @@ const Comments = styled.div`
 const Content = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 5px;
+  background-color: #f1a1a1;
 `;

@@ -56,7 +56,7 @@ const Write = () => {
     <StWrite 
     onSubmit={onSubmitHandler}
     >
-      <div>
+      <Container>
         <Title>
           <p>제목</p>
           <textarea
@@ -85,10 +85,10 @@ const Write = () => {
           // required
         />
         <Buttons>
-          {/* <button>취소</button> */}
+          <button>취소</button>
           <button>작성완료</button>
         </Buttons>
-      </div>
+      </Container>
     </StWrite>
   );
 };
@@ -97,26 +97,29 @@ export default Write;
 
 const StWrite = styled.form`
   display: flex;
-  justify-content: space-between;
-  margin: auto 400px;
-  border: 1px solid black;
-  padding: 30px 100px;
+  justify-content: center;
+  margin: auto;
 
   & textarea {
-    margin: 10px 0;
+    margin: 5px 0;
     width: 500px;
   }
-  margin-top: 140px;
+  margin-top: 320px;
+`;
+
+const Container = styled.div`
+  border: 1px solid black;
+  padding: 20px;
 `;
 
 const Title = styled.div`
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 const Body = styled.div`
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   & textarea {
     height: 250px;

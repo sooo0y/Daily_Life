@@ -52,15 +52,14 @@ const Detail = () => {
 export default Detail;
 
 const StDetail = styled.div`
-  margin: auto 400px;
-  padding: 30px 0 30px 0;
-  margin-top: 140px;
+  margin: 0 150px;
+  margin-top: 330px;
 `;
 
 const Post = styled.div`
   border: 1px solid black;
-  margin: 50px;
-  padding: 20px 50px;
+  margin: 30px;
+  padding: 30px;
 `;
 
 const Title = styled.div`
@@ -75,7 +74,7 @@ const Bottom = styled.div`
 
 const Img = styled.div`
   /* border: 1px solid black; */
-  width: 500px;
+  width: 100px;
   height: 100px;
 `;
 

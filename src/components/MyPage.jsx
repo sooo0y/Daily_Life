@@ -2,8 +2,8 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { __getPosts, deletePost } from "../redux/modules/post";
-import ModalPortal from "./modal/commentEdit/Portal";
-import Modal from "./modal/postEdit/Modal";
+import ModalPortal from "./modal/postEdit/Portal";
+import PostModal from "./modal/postEdit/PostModal";
 
 const MyPage = () => {
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const MyPage = () => {
 
         <ModalPortal>
           {modal && (
-            <Modal
+            <PostModal
               onModalHandler={onModalHandler}
               modal={modal}
               setModal={setModal}
@@ -78,16 +78,15 @@ const MyPage = () => {
 export default MyPage;
 
 const StMyPage = styled.div`
-  margin: auto 400px;
-  padding: 30px 0 30px 0;
-  margin-top: 140px;
-  flex-wrap: wrap;
+  padding: 20px 0;
+  margin-top: 310px;
 `;
 
 const List = styled.div`
   display: flex;
-  margin-top: 50px;
-  gap: 30px;
+  margin-top: 30px;
+  gap: 50px;
+  flex-wrap: wrap;
 `;
 
 const Card = styled.div`

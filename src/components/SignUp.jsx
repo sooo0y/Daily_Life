@@ -10,6 +10,7 @@ const SignUp = () => {
   const [id, setId] = React.useState("");
   const [pwd, setPwd] = React.useState("");
   const [pwd_check, setPwdCheck] = React.useState("");
+
   // const signup_ = () => {
   //   dispatch(_signUp(id, pwd, pwd_check));
   // };
@@ -18,24 +19,21 @@ const SignUp = () => {
     <StSignUp>
       <Form>
         <div className="form-list">
-          <label>
-            ID
-            </label>
+          <ID>
             <input
               type="text"
               onChange={(e) => {
                 setId(e.target.value);
               }}
-              placeholder="이메일을 입력해주세요"
+              placeholder="아이디를 입력해주세요"
               className="with-btn"
             />
-
-          <button>중복확인</button> 
+            <button>중복확인</button>
+          </ID>
         </div>
 
         <div className="form-list">
           <label>
-            PW
             <input
               type="password"
               onChange={(e) => {
@@ -48,7 +46,6 @@ const SignUp = () => {
 
         <div className="form-list">
           <label>
-            PW확인
             <input
               type="password"
               onChange={(e) => {
@@ -69,7 +66,7 @@ const SignUp = () => {
         </button>
         <button
           onClick={() => {
-            navigate("/signup");
+            navigate("/login");
           }}
         >
           회원가입하기
@@ -82,7 +79,7 @@ const SignUp = () => {
 export default SignUp;
 
 const StSignUp = styled.div`
-  margin: 200px;
+  margin-top: 380px;
 `;
 
 const Form = styled.div`
@@ -121,12 +118,10 @@ const Form = styled.div`
 `;
 
 const FormFoot = styled.div`
-  width: 100%;
+  gap: 20px;
+
   display: flex;
   justify-content: center;
-  button {
-    border-radius: 0.5rem;
-  }
 `;
 
 // const Btn = styled.button`
@@ -139,3 +134,12 @@ const FormFoot = styled.div`
 //     transition: 0.3s;
 //   }
 // `;
+
+const ID = styled.label`
+display: flex;
+
+& button {
+  height: 50px;
+  width: 100px;
+}
+`;

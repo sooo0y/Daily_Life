@@ -22,10 +22,9 @@ const Modal = (props) => {
             name="desc"
             value={editComment.desc}
             onChange={(e) => {
-              const { name, value } = e.target;
               setEditComment({
                 ...editComment,
-                [name]: value,
+                desc: e.target.value
               });
             }}
           />

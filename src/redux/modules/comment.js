@@ -30,9 +30,6 @@ export const commentsSlice = createSlice({
     },
 
     updateComment: (state, action) => {
-
-      console.log(action.payload.id)
-
       const index = state.comments.findIndex(
         (comment) => comment.id === action.payload.id
       );

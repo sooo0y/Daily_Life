@@ -8,6 +8,7 @@ const Modal = (props) => {
 
   const [editPost, setEditPost] = useState({
     id: props.eachPost.id,
+    author: props.eachPost.author,
     title: props.eachPost.title,
     desc: props.eachPost.desc,
     image: props.eachPost.image,
@@ -35,7 +36,7 @@ const Modal = (props) => {
           <input
             type="text"
             name="desc"
-            defaultValue={props.eachPost.desc}
+            value={props.eachPost.desc}
             onChange={(e) => {
               setEditPost({
                 ...editPost,
@@ -49,7 +50,7 @@ const Modal = (props) => {
           <input
             type="file"
             name="image"
-            defaultValue={props.eachPost.image}
+            value={props.eachPost.image}
             onChange={(e) => {
               setEditPost({
                 ...editPost,
