@@ -1,7 +1,16 @@
-import { createStore } from "redux";
-import { combineReducers } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import commentsSlice from "../modules/comment";
+import postSlice from "../modules/post";
+import userSlice from "../modules/user";
+import imageSlice from "../modules/image";
 
-const rootReducer = combineReducers({});
-const store = createStore(rootReducer);
+const store = configureStore({
+  reducer: {
+		comment: commentsSlice.reducer,
+    post: postSlice.reducer,
+    user: userSlice.reducer,
+    image: imageSlice.reducer
+  },
+});
 
 export default store;

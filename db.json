@@ -1,0 +1,48 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "1112223333",
+      "author": "김소연",
+      "image": "",
+      "content": "11111",
+      "likeCount": 0,
+      "commentCount": 0
+    },
+    {
+      "id": 2,
+      "title": "12121233344455",
+      "author": "김소연",
+      "image": "",
+      "content": "121212",
+      "likeCount": 0,
+      "commentCount": 0,
+      "desc": "ㅇㄹㅇㄹ"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "parentId": "1",
+      "author": "김소연",
+      "desc": "1212",
+      "modifiedAt": ""
+    },
+    {
+      "id": 2,
+      "parentId": "1",
+      "author": "김소연",
+      "desc": "3434",
+      "modifiedAt": ""
+    },
+    {
+      "id": 3,
+      "parentId": "2",
+      "author": "김소연",
+      "desc": "5656",
+      "modifiedAt": ""
+    }
+  ],
+  "signup": [],
+  "login": []
+}
